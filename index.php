@@ -1,4 +1,16 @@
 <?php
+
+
+/*
+ * Register The Custom Post Type.
+ *
+ * @param string $post_type The post type slug.
+ * @param string $singular_name The post type singular name.
+ * @param string $pluram_name The post stype plural name.
+ * @param string $gender The post type word gender.
+ * @param array<string, mixed> $custom_labels The array with $labels properties. See WordPress doc for array keys.
+ * @param array<string, mixed> $custom_args The array with $args properties. See WordPress doc for array keys.
+ */
 function register_custom_post_type(
 	string $post_type,
 	string $singular_name,
@@ -6,7 +18,7 @@ function register_custom_post_type(
 	string $gender = 'M',
 	array $custom_labels = array(),
 	array $custom_args = array()
-) {
+): void {
 	$labels   = array(
 		'name'                  => _x( $plural_name,
 			'Nome no Plural',
@@ -103,7 +115,7 @@ function register_custom_post_type(
 function register_custom_taxonomy(
 	string $taxonomy,
 	string $post_type
-) {
+): void {
 	$labels = array(
 		'name'              => _x( 'Categorias',
 			'Nome da categoria',
@@ -135,5 +147,6 @@ function register_custom_taxonomy(
 		'query_var'         => true,
 		'rewrite'           => array( 'slug' => $post_type . '-categories' ),
 	);
+
 	register_taxonomy( $taxonomy, array( $post_type ), $args );
 }
